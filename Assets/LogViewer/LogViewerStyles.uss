@@ -1,0 +1,86 @@
+.visible {
+}
+
+.hidden {
+    display: none;
+}
+
+.full {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.full {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.top-bar-button__icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.top-bar-button {
+    flex-direction: row;
+    align-items: center;
+    min-width: 56px;
+    flex-shrink: 0;
+    padding-top: 2px;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 2px;
+    margin-top: 0;
+    margin-right: 3px;
+    margin-bottom: 0;
+    margin-left: 0;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.top-bar-button--unselected {
+    background-color: rgba(55, 55, 55, 0);
+}
+
+.log-list-item {
+    flex-direction: row;
+    flex-shrink: 0;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+}
+
+.log-list-item__icon {
+    width: 32px;
+    height: 32px;
+}
+
+.icon--error {
+    background-image: resource('d_console.erroricon@2x');
+}
+
+.log-list-item__summary {
+    flex-grow: 1;
+    margin-left: 3px;
+}
+
+.icon--message {
+    background-image: resource('d_console.infoicon@2x');
+}
+
+:root {
+    font-size: 13px;
+}

@@ -24,7 +24,7 @@ namespace LogViewer
             {
                 Content = content.Trim(Environment.NewLine.ToCharArray());
 
-                string[] splits = Content.Split(Environment.NewLine);
+                string[] splits = Content.Split('\n');
 
                 Summary = splits[0];
 
@@ -49,7 +49,7 @@ namespace LogViewer
 
         public IReadOnlyList<Event> Events => events;
 
-        private readonly List<Event> events = new();
+        private readonly List<Event> events = new List<Event>();
 
         public static LogFile LoadFromFile(string filepath)
         {
@@ -62,9 +62,9 @@ namespace LogViewer
         {
             Raw = raw;
 
-            Regex regexEmptyIL2CPPLines = new(@"\[ line -\d+\]");
+            Regex regexEmptyIL2CPPLines = new Regex(@"\[ line -\d+\]");
 
-            string[] splits = raw.Split($"{Environment.NewLine}{Environment.NewLine}");
+            string[] splits = raw.Split(new string[] { Environment.NewLine + Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string split in splits)
             {
@@ -74,7 +74,7 @@ namespace LogViewer
                     continue;
                 }
 
-                Event logEvent = new(split);
+                Event logEvent = new Event(split);
 
                 events.Add(logEvent);
 

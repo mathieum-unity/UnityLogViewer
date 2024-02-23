@@ -2,23 +2,71 @@ using UnityEngine;
 
 namespace LogViewer
 {
-    public class LogViewerOnGUI
+    public abstract class AbstractLogViewer
     {
         public void SetLog(LogFile logFile)
         {
             this.logFile = logFile;
 
             selectedLogIndex = -1;
+            OnLogfileLoaded();
+        }
+
+        protected abstract void OnLogfileLoaded();
+
+        protected LogFile logFile;
+        public LogFile.EventTypes visibleEventTypes = (LogFile.EventTypes)~0;
+
+        public int selectedLogIndex  
+        {
+            get;
+            protected set;
+        }
+
+        public bool showMessages
+        {
+            get => (visibleEventTypes & LogFile.EventTypes.Message) != 0;
+            set
+            {
+                if (value)
+                {
+                    visibleEventTypes |= LogFile.EventTypes.Message;
+                }
+                else
+                {
+                    visibleEventTypes &= ~LogFile.EventTypes.Message;
+                }
+            }
+        }
+
+        public bool showErrors
+        {
+            get => (visibleEventTypes & LogFile.EventTypes.Error) != 0;
+            set
+            {
+                if (value)
+                {
+                    visibleEventTypes |= LogFile.EventTypes.Error;
+                }
+                else
+                {
+                    visibleEventTypes &= ~LogFile.EventTypes.Error;
+                }
+            }
+        }
+    }
+    
+    public class LogViewerOnGUI : AbstractLogViewer
+    {
+        private Vector2 logListScrollPosition, logScrollPosition;
+
+        protected override void OnLogfileLoaded()
+        {
             logListScrollPosition = Vector2.zero;
             logScrollPosition = Vector2.zero;
         }
 
-        private LogFile logFile;
-
-        private LogFile.EventTypes visibleEventTypes = (LogFile.EventTypes)~0;
-        private Vector2 logListScrollPosition, logScrollPosition;
-        private int selectedLogIndex = -1;
-
+        
         public void OnGUI()
         {
             GUILayout.BeginVertical(GUILayout.ExpandHeight(true), GUILayout.ExpandWidth(true));
@@ -47,8 +95,8 @@ namespace LogViewer
             int messageCount = logFile.MessageCount;
             int errorCount = logFile.ErrorCount;
 
-            GUIStyle messageStyle = (visibleEventTypes & LogFile.EventTypes.Message) != 0 ? Styles.MiniButtonSelected : Styles.MiniButton;
-            GUIStyle errorStyle = (visibleEventTypes & LogFile.EventTypes.Error) != 0 ? Styles.MiniButtonSelected : Styles.MiniButton;
+            GUIStyle messageStyle = showMessages ? Styles.MiniButtonSelected : Styles.MiniButton;
+            GUIStyle errorStyle = showErrors ? Styles.MiniButtonSelected : Styles.MiniButton;
 
             if (GUILayout.Button(new GUIContent(messageCount.ToString(), Styles.iconInfo.image), messageStyle, GUILayout.MinWidth(42), GUILayout.ExpandWidth(false)))
                 visibleEventTypes ^= LogFile.EventTypes.Message;

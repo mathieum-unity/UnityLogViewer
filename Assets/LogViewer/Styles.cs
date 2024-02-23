@@ -20,14 +20,14 @@ namespace LogViewer
 
         public static bool Initialized { get; private set; }
 
-        private static readonly List<Texture> textures = new();
+        private static readonly List<Texture> textures = new List<Texture>();
 
         public static void Initialize()
         {
             iconInfo = new GUIContent((Texture)Resources.Load("d_console.infoicon@2x"));
             iconError = new GUIContent((Texture)Resources.Load("d_console.erroricon@2x"));
 
-            Color textColor = new(0.824f, 0.824f, 0.824f);
+            Color textColor = new Color(0.824f, 0.824f, 0.824f);
 
             MiniButton = new GUIStyle()
             {
@@ -100,7 +100,7 @@ namespace LogViewer
 
         private static GUIStyle CopyStyleWithColor(GUIStyle target, Color color)
         {
-            GUIStyle cloned = new(target);
+            GUIStyle cloned = new GUIStyle(target);
             cloned.normal.background = MakeTexture(2, 2, color);
 
             return cloned;
@@ -115,7 +115,7 @@ namespace LogViewer
                 pix[i] = color;
             }
 
-            Texture2D result = new(width, height);
+            Texture2D result = new Texture2D(width, height);
             result.SetPixels(pix);
             result.Apply();
 

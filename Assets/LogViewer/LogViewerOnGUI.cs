@@ -4,11 +4,11 @@ namespace LogViewer
 {
     public abstract class AbstractLogViewer
     {
-        public void SetLog(LogFile logFile)
+        public void SetLog(LogFile logFile, int selectedLog)
         {
             this.logFile = logFile;
 
-            selectedLogIndex = -1;
+            selectedLogIndex = selectedLog;
             OnLogfileLoaded();
         }
 
@@ -129,7 +129,7 @@ namespace LogViewer
                 if (selectedLogIndex == i)
                     style = Styles.SelectedBackground;
                 else
-                    style = i % 2 == 0 ? Styles.EvenBackground : Styles.OddBackground;
+                    style = i % 2 != 0 ? Styles.EvenBackground : Styles.OddBackground;
 
                 GUILayout.BeginHorizontal(style, GUILayout.Height(40));
 

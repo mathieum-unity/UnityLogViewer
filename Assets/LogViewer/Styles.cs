@@ -33,7 +33,8 @@ namespace LogViewer
             {
                 border = new RectOffset(6, 6, 0, 0),
                 padding = new RectOffset(5, 5, 2, 2),
-                fixedHeight = 20
+                fixedHeight = 20,
+                fontSize = 12,
             };
 
             MiniButton.normal.textColor = textColor;
@@ -44,6 +45,7 @@ namespace LogViewer
             {
                 fixedHeight = 32,
                 fixedWidth = 32,
+                fontSize = 12,
                 margin = new RectOffset(5, 5, 5, 5)
             };
 
@@ -59,6 +61,7 @@ namespace LogViewer
             EvenBackground = new GUIStyle()
             {
                 border = new RectOffset(30, 3, 3, 3),
+                fontSize = 12,
                 alignment = TextAnchor.MiddleLeft,
             };
 

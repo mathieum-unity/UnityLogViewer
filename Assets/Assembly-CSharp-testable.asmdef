@@ -1,0 +1,21 @@
+{
+    "name": "Assembly-CSharp-testable",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ac44305ba21d0314b9184fcd9d99e971",
+        "GUID:49818357e697641afb75d2f8acaf1861",
+        "GUID:343deaaf83e0cee4ca978e7df0b80d21",
+        "GUID:2bafac87e7f4b9b418d9448d219b01ab"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

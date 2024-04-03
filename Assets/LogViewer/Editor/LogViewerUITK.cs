@@ -25,9 +25,58 @@ namespace LogViewer
 
         private LogViewerController viewer;
 
+#if ENABLE_CACHE_STATS
+        private Label uitkHitsPercent;
+        private Label imguiHitsPercent;
+
+        void UpdatePercent(Label lbl, int hit, int miss)
+        {
+            var total = hit + miss;
+
+            if (hit + miss > 0)
+            {
+                float v = hit / (float)(hit + miss);
+
+                lbl.text = "" + (int)(v* 100);
+            }
+            else
+            {
+                lbl.text = "---";
+            }
+        }
+        void UpdatePercent()
+        {
+            UpdatePercent(uitkHitsPercent, TextHandleCacheStats.UITK_Hits, TextHandleCacheStats.UITK_Miss);
+            UpdatePercent(imguiHitsPercent, TextHandleCacheStats.IMGUI_Hits, TextHandleCacheStats.IMGUI_Miss);
+        }
+#endif
+
         public void OnEnable()
         {
+
+#if ENABLE_CACHE_STATS
+            var stats = new VisualElement();
+            stats.style.flexDirection = FlexDirection.Row;
+            uitkHitsPercent = new Label();
+            imguiHitsPercent = new Label();
+
+            uitkHitsPercent.style.width = 100;
+            imguiHitsPercent.style.width = 100;
+            
+            stats.Add(new Label("UITK Text cache Hits"));
+            stats.Add(uitkHitsPercent);
+            stats.Add(new Label("%"));
+            
+            stats.Add(new Label("IMGUI Text cache Hits"));
+            stats.Add(imguiHitsPercent);
+            stats.Add(new Label("%"));
+            rootVisualElement.Add(stats);
+
+            rootVisualElement.schedule.Execute(UpdatePercent).Every(100);
+#endif
+            
             var view = m_LogViewerView.Instantiate();
+            view.style.flexGrow = 1;
             rootVisualElement.Add(view);
 
             viewer = new LogViewerController(view);
@@ -65,7 +114,7 @@ namespace LogViewer
         {
             if (File.Exists(path))
             {
-                viewer.SetLog(LogFile.LoadFromFile(path));
+                viewer.SetLog(LogFile.LoadFromFile(path), -1);
                 lastOpenedLogPath = path;
                 titleContent = new GUIContent(Path.GetFileName(path));
                 return true;

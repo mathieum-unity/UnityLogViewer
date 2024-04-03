@@ -47,8 +47,9 @@ namespace LogViewer
         private TextElement messageCount;
         private TextElement errorCount;
 
+        //private UnityEngine.UIElements2020.ListView2020 logList;
         private ListView logList;
-
+        
         private TextElement logEntryContent;
         
         // 2 base containers
@@ -100,7 +101,7 @@ namespace LogViewer
                     logIndex = i;
                     break;
                 }
-
+            
                 OnLogItemSelected(logIndex);
             };
             #else

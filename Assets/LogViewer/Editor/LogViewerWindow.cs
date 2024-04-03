@@ -12,6 +12,11 @@ namespace LogViewer
             GetWindow<LogViewerWindow>("Log Viewer");
         }
 
+        [SerializeField] public string lastOpenedLogPath;
+      
+        [SerializeField]
+        public int selectedLogIndex;
+
         private LogViewerOnGUI viewer;
 
         private void OnEnable()
@@ -19,10 +24,26 @@ namespace LogViewer
             Styles.Initialize();
 
             viewer = new LogViewerOnGUI();
+
+            if (lastOpenedLogPath != null)
+            {
+                if (File.Exists(lastOpenedLogPath))
+                {
+                    Load(lastOpenedLogPath);
+                }
+            }
+        }
+
+        private void Load(string path)
+        {
+            viewer.SetLog(LogFile.LoadFromFile(path), selectedLogIndex);
+            titleContent = new GUIContent(Path.GetFileName(path));
+            lastOpenedLogPath = path;
         }
 
         private void OnDisable()
         {
+            selectedLogIndex = viewer.selectedLogIndex;
             Styles.Deinitialize();
         }
 
@@ -42,8 +63,8 @@ namespace LogViewer
                     {
                         if (File.Exists(path))
                         {
-                            viewer.SetLog(LogFile.LoadFromFile(path));
-                            titleContent = new GUIContent(Path.GetFileName(path));
+                            selectedLogIndex = -1;
+                            Load(path);
                             break;
                         }
                     }

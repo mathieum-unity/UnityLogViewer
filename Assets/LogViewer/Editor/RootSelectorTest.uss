@@ -1,0 +1,5 @@
+:root {
+	color : red;
+	font-size: 36px;
+	flex-direction: row-reverse;
+}

@@ -1,24 +1,24 @@
-<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
     <Style src="project://database/Assets/LogViewer/LogViewerStyles.uss?fileID=7433441132597879392&amp;guid=1d86c5abfdc4fe04397cd67de1df2e4b&amp;type=3#LogViewerStyles" />
-    <engine:VisualElement name="top-container" style="flex-grow: 1;">
-        <engine:VisualElement name="log-view" class="full" style="flex-grow: 1; position: absolute; top: 0; bottom: 0;">
-            <engine:VisualElement name="top-row" style="flex-grow: 0; flex-direction: row; flex-shrink: 0;">
-                <engine:Button name="message-button" class="top-bar-button">
-                    <engine:VisualElement name="icon" class="top-bar-button__icon icon--message" />
-                    <engine:Label name="message-count" />
-                </engine:Button>
-                <engine:Button name="error-button" selectable="true" select-word-by-double-click="false" class="top-bar-button">
-                    <engine:VisualElement name="icon" class="top-bar-button__icon icon--error" />
-                    <engine:Label name="error-count" />
-                </engine:Button>
-            </engine:VisualElement>
-            <engine:ListView name="log-list" virtualization-method="FixedHeight" show-alternating-row-backgrounds="ContentOnly" fixed-item-height="40" style="flex-grow: 1;" />
-            <engine:ScrollView name="log-scroll" style="height: 256px; flex-shrink: 0;">
-                <engine:Label name="log-contents" selectable="true" />
-            </engine:ScrollView>
-        </engine:VisualElement>
-        <engine:VisualElement name="empty-view" class="full hidden" style="flex-grow: 1; justify-content: center; align-content: center; align-items: center;">
-            <engine:Label text="Drop a &lt;b&gt;Player.log&lt;/b&gt; here" parse-escape-sequences="true" />
-        </engine:VisualElement>
-    </engine:VisualElement>
-</engine:UXML>
+    <ui:VisualElement name="top-container" style="flex-grow: 1;">
+        <ui:VisualElement name="log-view" class="full" style="flex-grow: 1; position: absolute; top: 0; bottom: 0;">
+            <ui:VisualElement name="top-row" style="flex-grow: 0; flex-direction: row; flex-shrink: 0;">
+                <ui:Button name="message-button" class="top-bar-button">
+                    <ui:VisualElement name="icon" class="top-bar-button__icon icon--message" />
+                    <ui:Label name="message-count" />
+                </ui:Button>
+                <ui:Button name="error-button" selectable="true" select-word-by-double-click="false" class="top-bar-button">
+                    <ui:VisualElement name="icon" class="top-bar-button__icon icon--error" />
+                    <ui:Label name="error-count" />
+                </ui:Button>
+            </ui:VisualElement>
+            <ui:ListView name="log-list" virtualization-method="FixedHeight" show-alternating-row-backgrounds="ContentOnly" fixed-item-height="40" item-height="40" style="flex-grow: 1;" />
+            <ui:ScrollView name="log-scroll" style="height: 256px; flex-shrink: 0;">
+                <ui:Label name="log-contents" selectable="true" />
+            </ui:ScrollView>
+        </ui:VisualElement>
+        <ui:VisualElement name="empty-view" class="full hidden" style="flex-grow: 1; justify-content: center; align-content: center; align-items: center;">
+            <ui:Label text="Drop a &lt;b&gt;Player.log&lt;/b&gt; here" parse-escape-sequences="true" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

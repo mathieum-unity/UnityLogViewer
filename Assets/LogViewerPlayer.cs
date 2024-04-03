@@ -22,7 +22,7 @@ namespace LogViewer
 #if UNITY_EDITOR
             if (File.Exists(testLogFilePath))
             {
-                logViewer.SetLog(LogFile.LoadFromFile(testLogFilePath));
+                logViewer.SetLog(LogFile.LoadFromFile(testLogFilePath), -1);
             }
 #else
             UnityDragAndDropHook.InstallHook();
